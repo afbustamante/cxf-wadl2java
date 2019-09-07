@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://andresbustamante.net/example/users" version="1.0"
+           xmlns:u="http://andresbustamante.net/example/users" elementFormDefault="qualified">
+
+    <xs:complexType name="userType">
+        <xs:sequence>
+            <xs:element name="id" type="xs:int" minOccurs="0"/>
+            <xs:element name="firstName" minOccurs="0">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:minLength value="1"/>
+                        <xs:maxLength value="50"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="surname" minOccurs="0">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:minLength value="1"/>
+                        <xs:maxLength value="50"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="email">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:minLength value="1"/>
+                        <xs:maxLength value="50"/>
+                        <xs:pattern value="^[A-Za-z0-9_\.\-]+\@[A-Za-z0-9_\.\-]+\.[A-Za-z]+$"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="password" minOccurs="0">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:minLength value="0"/>
+                        <xs:maxLength value="64"/>
+                        <xs:pattern value="^[A-Za-z0-9]+$"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="creationDate" type="xs:dateTime" minOccurs="0" />
+            <xs:element name="active" type="xs:boolean" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:element name="user" type="u:userType" />
+
+    <xs:element name="users">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="u:user" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>
